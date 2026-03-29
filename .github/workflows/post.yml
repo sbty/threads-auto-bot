@@ -26,7 +26,7 @@ jobs:
 
       - name: Random delay
         run: |
-          DELAY=$((RANDOM % 1800))
+          DELAY=$((RANDOM % 300))
           echo "Waiting ${DELAY}s (~$((DELAY/60))min)..."
           sleep $DELAY
 
