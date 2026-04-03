@@ -1,0 +1,41 @@
+name: Account2 Post (yohei753)
+
+on:
+  schedule:
+    - cron: '30 22 * * *'  # 朝  7:30 JST
+    - cron: '30 3 * * *'   # 昼 12:30 JST
+    - cron: '30 9 * * *'   # 夜 18:30 JST
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Random delay
+        run: |
+          DELAY=$((RANDOM % 300))
+          echo "Waiting ${DELAY}s..."
+          sleep $DELAY
+
+      - name: Post Account2
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ACCOUNT2_THREADS_ACCESS_TOKEN: ${{ secrets.ACCOUNT2_THREADS_ACCESS_TOKEN }}
+          ACCOUNT2_THREADS_USER_ID: ${{ secrets.ACCOUNT2_THREADS_USER_ID }}
+          ACCOUNT2_NICHE: "農業,AI,音楽"
+          ACCOUNT2_TONE: "丁寧、ユーモア"
+          ACCOUNT2_TOPICS: "農業,AI,音楽"
+        run: python post_once.py ACCOUNT2

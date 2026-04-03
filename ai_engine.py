@@ -7,7 +7,6 @@ from database import Database
 
 # Gemini初期化
 client = genai.Client(api_key=Config.GEMINI_API_KEY)
-db = Database()
 
 
 class AIEngine:
@@ -49,8 +48,11 @@ class AIEngine:
             raise ValueError(f"JSONパース失敗: {text[:200]}")
 
     @staticmethod
-    def generate_post(custom_topic=None, rss_context=None):
+    def generate_post(custom_topic=None, rss_context=None,
+                      account_niche=None, account_tone=None, account_db=None):
         """メイン投稿生成"""
+
+        db = account_db if account_db else Database()
 
         recent_posts = db.get_recent_posts(20)
         recent_texts = [p[0] for p in recent_posts]
@@ -59,7 +61,6 @@ class AIEngine:
         top_topic_str = ", ".join([t[0] for t in top_topics]) if top_topics else "no data yet"
 
         styles = [
-            # "question style - ask followers a question",
             "knowledge sharing - useful tips",
             "opinion style - unique take on a trend",
             "story style - personal episode",
@@ -69,7 +70,9 @@ class AIEngine:
         ]
         selected_style = random.choice(styles)
 
-        niche = custom_topic if custom_topic else Config.ACCOUNT_NICHE
+        niche = custom_topic if custom_topic else (account_niche or Config.ACCOUNT1.niche)
+        tone = account_tone or Config.ACCOUNT1.tone
+
         recent_str = "\n".join(recent_texts[-10:]) if recent_texts else "none"
         rss_str = "\n".join(rss_context) if rss_context else "no headlines available"
 
@@ -78,7 +81,7 @@ class AIEngine:
             "\n"
             "## Account Settings\n"
             f"- Today's topic: {niche}\n"
-            f"- Tone: {Config.ACCOUNT_TONE}\n"
+            f"- Tone: {tone}\n"
             "- Goal: maximize engagement, gain followers\n"
             "\n"
             "## Rules\n"
@@ -90,7 +93,7 @@ class AIEngine:
             "- Do not repeat past posts\n"
             "- Reference current news/trends when relevant\n"
             "\n"
-             "## IMPORTANT: Persona Rules\n"
+            "## IMPORTANT: Persona Rules\n"
             "- You are a NEWS COMMENTER, not a participant\n"
             "- NEVER pretend you attended events, matches, or concerts\n"
             "- NEVER say 「生で見た」「行ってきた」「実際に使った」 unless it's clearly general advice\n"
@@ -124,13 +127,15 @@ class AIEngine:
         return AIEngine._parse_json(raw)
 
     @staticmethod
-    def generate_reply(original_post, user_comment):
+    def generate_reply(original_post, user_comment,
+                       account_tone=None):
         """自動リプライ生成"""
+        tone = account_tone or Config.ACCOUNT1.tone
 
         prompt = f"""
 あなたはThreadsアカウントの運営者です。
 フォロワーのコメントに対して、親しみやすく知的な返信をしてください。
-トーン: {Config.ACCOUNT_TONE}
+トーン: {tone}
 
 ルール:
 - 100文字以内
@@ -148,13 +153,16 @@ class AIEngine:
         return raw.strip()
 
     @staticmethod
-    def generate_weekly_content_plan():
+    def generate_weekly_content_plan(account_niche=None, account_db=None):
         """1週間分のコンテンツプラン生成"""
+
+        db = account_db if account_db else Database()
+        niche = account_niche or Config.ACCOUNT1.niche
 
         top_topics = db.get_top_performing_topics()
 
         prompt = f"""
-{Config.ACCOUNT_NICHE}ジャンルのThreadsアカウント用に
+{niche}ジャンルのThreadsアカウント用に
 1週間分（7日間、1日2投稿 = 14投稿）のコンテンツプランを作成してください。
 
 パフォーマンスが良いトピック: {top_topics}

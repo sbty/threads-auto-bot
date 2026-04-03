@@ -2,65 +2,64 @@ import sqlite3
 from datetime import datetime
 from config import Config
 
-class Database:
-    def __init__(self):
-        self.conn = sqlite3.connect(Config.DB_PATH)
-        self._create_tables()
 
-    def _create_tables(self):
-        self.conn.executescript("""
-            CREATE TABLE IF NOT EXISTS posts (
+class Database:
+    def __init__(self, account_prefix="ACCOUNT1"):
+        self.account_prefix = account_prefix
+        self.table_name = f"posts_{account_prefix.lower()}"
+        self._init_db()
+    
+    def _init_db(self):
+        conn = sqlite3.connect(Config.DB_PATH)
+        c = conn.cursor()
+        c.execute(f'''
+            CREATE TABLE IF NOT EXISTS {self.table_name} (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                thread_id TEXT,
                 content TEXT,
                 topic TEXT,
-                posted_at TIMESTAMP,
-                likes INTEGER DEFAULT 0,
-                replies INTEGER DEFAULT 0,
-                impressions INTEGER DEFAULT 0
-            );
-            CREATE TABLE IF NOT EXISTS topics (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                topic TEXT UNIQUE,
-                used_count INTEGER DEFAULT 0,
-                avg_engagement REAL DEFAULT 0
-            );
-            CREATE TABLE IF NOT EXISTS performance_log (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                date TEXT,
-                total_posts INTEGER,
-                total_likes INTEGER,
-                total_impressions INTEGER,
-                follower_count INTEGER
-            );
-        """)
-        self.conn.commit()
-
-    def save_post(self, thread_id, content, topic):
-        self.conn.execute(
-            "INSERT INTO posts (thread_id, content, topic, posted_at) VALUES (?, ?, ?, ?)",
-            (thread_id, content, topic, datetime.now().isoformat())
-        )
-        self.conn.commit()
-
-    def get_recent_posts(self, limit=20):
-        cursor = self.conn.execute(
-            "SELECT content, topic, likes FROM posts ORDER BY posted_at DESC LIMIT ?",
-            (limit,)
-        )
-        return cursor.fetchall()
+                post_id TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        conn.commit()
+        conn.close()
+    
+    def save_post(self, content, topic, post_id=None):
+        conn = sqlite3.connect(Config.DB_PATH)
+        c = conn.cursor()
+        c.execute(f'''
+            INSERT INTO {self.table_name} (content, topic, post_id, created_at)
+            VALUES (?, ?, ?, ?)
+        ''', (content, topic, post_id, datetime.now()))
+        conn.commit()
+        conn.close()
+        print(f"  💾 Saved to {self.table_name}")
+    
+    def get_recent_posts(self, limit=10):
+        conn = sqlite3.connect(Config.DB_PATH)
+        c = conn.cursor()
+        c.execute(f'''
+            SELECT content, topic, created_at 
+            FROM {self.table_name} 
+            ORDER BY created_at DESC 
+            LIMIT ?
+        ''', (limit,))
+        results = c.fetchall()
+        conn.close()
+        return results
 
     def get_top_performing_topics(self, limit=5):
-        cursor = self.conn.execute("""
-            SELECT topic, AVG(likes + replies) as avg_engagement
-            FROM posts WHERE likes > 0
-            GROUP BY topic ORDER BY avg_engagement DESC LIMIT ?
-        """, (limit,))
-        return cursor.fetchall()
-
-    def update_post_metrics(self, thread_id, likes, replies, impressions):
-        self.conn.execute("""
-            UPDATE posts SET likes=?, replies=?, impressions=?
-            WHERE thread_id=?
-        """, (likes, replies, impressions, thread_id))
-        self.conn.commit()
+        """よく投稿しているトピックを取得"""
+        conn = sqlite3.connect(Config.DB_PATH)
+        c = conn.cursor()
+        c.execute(f'''
+            SELECT topic, COUNT(*) as count
+            FROM {self.table_name}
+            WHERE topic IS NOT NULL
+            GROUP BY topic
+            ORDER BY count DESC
+            LIMIT ?
+        ''', (limit,))
+        results = c.fetchall()
+        conn.close()
+        return results

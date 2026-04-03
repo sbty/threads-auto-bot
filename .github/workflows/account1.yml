@@ -1,4 +1,4 @@
-name: Threads Auto Post
+name: Account1 Post (machiru731)
 
 on:
   schedule:
@@ -11,8 +11,6 @@ jobs:
   post:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout
@@ -29,12 +27,15 @@ jobs:
       - name: Random delay
         run: |
           DELAY=$((RANDOM % 300))
-          echo "Waiting ${DELAY}s (~$((DELAY/60))min)..."
+          echo "Waiting ${DELAY}s..."
           sleep $DELAY
 
-      - name: Post to Threads
+      - name: Post Account1
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
-          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
-        run: python post_once.py
+          ACCOUNT1_THREADS_ACCESS_TOKEN: ${{ secrets.ACCOUNT1_THREADS_ACCESS_TOKEN }}
+          ACCOUNT1_THREADS_USER_ID: ${{ secrets.ACCOUNT1_THREADS_USER_ID }}
+          ACCOUNT1_NICHE: "テクノロジー"
+          ACCOUNT1_TONE: "カジュアルで知的"
+          ACCOUNT1_TOPICS: "音楽,サッカー,生活"
+        run: python post_once.py ACCOUNT1

@@ -2,7 +2,8 @@ import feedparser
 import random
 
 
-RSS_FEEDS = {
+# アカウント1: machiru731（テクノロジー / 音楽,サッカー,生活）
+ACCOUNT1_FEEDS = {
     "音楽": [
         "https://natalie.mu/music/feed/news",
     ],
@@ -14,10 +15,36 @@ RSS_FEEDS = {
     ],
 }
 
+# アカウント2: yohei753（農業,AI,音楽）- 海外ソース
+ACCOUNT2_FEEDS = {
+    "農業": [
+        "https://modernfarmer.com/feed/",
+        "https://www.agweb.com/rss/news",
+        "https://www.successfulfarming.com/feed",
+    ],
+    "AI": [
+        "https://feeds.feedburner.com/mittechipreview",
+        "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+        "https://techcrunch.com/category/artificial-intelligence/feed/",
+    ],
+    "音楽": [
+        "https://pitchfork.com/feed/feed-news/rss",
+        "https://www.stereogum.com/feed/",
+        "https://consequence.net/feed/",
+    ],
+}
 
-def fetch_news(category, max_items=5):
-    """指定カテゴリのRSSから最新ニュースのタイトルを取得"""
-    feeds = RSS_FEEDS.get(category, [])
+# アカウント名 → フィード辞書のマッピング
+ACCOUNT_FEEDS = {
+    "account1": ACCOUNT1_FEEDS,
+    "account2": ACCOUNT2_FEEDS,
+}
+
+
+def fetch_news(category, max_items=5, account="account1"):
+    """指定アカウント・カテゴリのRSSから最新ニュースのタイトルを取得"""
+    feeds_dict = ACCOUNT_FEEDS.get(account.lower(), ACCOUNT1_FEEDS)
+    feeds = feeds_dict.get(category, [])
     articles = []
 
     for url in feeds:
@@ -35,8 +62,15 @@ def fetch_news(category, max_items=5):
 
 
 if __name__ == "__main__":
-    for cat in ["音楽", "サッカー", "生活"]:
-        print(f"\n=== {cat} ===")
-        news = fetch_news(cat)
-        for n in news:
-            print(f"  - {n}")
+    for account_name, feeds_dict in ACCOUNT_FEEDS.items():
+        print(f"\n{'='*40}")
+        print(f"  {account_name}")
+        print(f"{'='*40}")
+        for cat in feeds_dict.keys():
+            print(f"\n--- {cat} ---")
+            news = fetch_news(cat, account=account_name)
+            if news:
+                for n in news:
+                    print(f"  - {n}")
+            else:
+                print(f"  (取得できず)")
