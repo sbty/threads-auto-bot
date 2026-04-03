@@ -28,6 +28,6 @@ jobs:
       - name: Post to Threads
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          THREADS_ACCESS_TOKEN: ${{ secrets.ACCOUNT3_THREADS_ACCESS_TOKEN }}
-          THREADS_USER_ID: ${{ secrets.ACCOUNT3_THREADS_USER_ID }}
+          ACCOUNT3_THREADS_ACCESS_TOKEN: ${{ secrets.ACCOUNT3_THREADS_ACCESS_TOKEN }}
+          ACCOUNT3_THREADS_USER_ID: ${{ secrets.ACCOUNT3_THREADS_USER_ID }}
         run: python post_once.py ACCOUNT3
