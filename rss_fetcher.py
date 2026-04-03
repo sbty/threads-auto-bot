@@ -34,10 +34,27 @@ ACCOUNT2_FEEDS = {
     ],
 }
 
+ACCOUNT3_FEEDS = {
+    "NBA": [
+        "https://www.espn.com/espn/rss/nba/news",
+        "https://bleacherreport.com/articles/feed?tag_id=19",
+    ],
+    "プログラミング": [
+        "https://dev.to/feed",
+        "https://hnrss.org/frontpage",
+    ],
+    "GitHubトレンド": [
+        "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
+        "https://www.ghacks.net/feed/",
+    ],
+}
+
 # アカウント名 → フィード辞書のマッピング
 ACCOUNT_FEEDS = {
     "account1": ACCOUNT1_FEEDS,
     "account2": ACCOUNT2_FEEDS,
+    "account3": ACCOUNT3_FEEDS,
+
 }
 
 

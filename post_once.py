@@ -88,10 +88,15 @@ def main():
 
     account_name = sys.argv[1].upper()
 
-    if account_name == "ACCOUNT1":
-        post_for_account(Config.ACCOUNT1)
-    elif account_name == "ACCOUNT2":
-        post_for_account(Config.ACCOUNT2)
+    # アカウント名から動的に取得
+    account_map = {
+        "ACCOUNT1": Config.ACCOUNT1,
+        "ACCOUNT2": Config.ACCOUNT2,
+        "ACCOUNT3": Config.ACCOUNT3,
+    }
+
+    if account_name in account_map:
+        post_for_account(account_map[account_name])
     else:
         print(f"❌ Unknown account: {account_name}")
         sys.exit(1)

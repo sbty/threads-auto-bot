@@ -1,0 +1,33 @@
+name: Account3 Post
+
+on:
+  schedule:
+    # JST 8:00 / 13:00 / 19:00 (UTC -9時間)
+    - cron: '0 23 * * *'   # JST 8:00
+    - cron: '0 4 * * *'    # JST 13:00
+    - cron: '0 10 * * *'   # JST 19:00
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Random delay
+        run: sleep $((RANDOM % 300))
+
+      - name: Post to Threads
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.ACCOUNT3_THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.ACCOUNT3_THREADS_USER_ID }}
+        run: python post_once.py ACCOUNT3

@@ -45,11 +45,18 @@ class Config:
         default_tone="丁寧、ユーモア",
         default_topics="農業,AI,音楽"
     )
+
+    ACCOUNT3 = AccountConfig(
+        "ACCOUNT3",
+        default_niche="プログラミングとスポーツ",
+        default_tone="ポジティブで丁寧",
+        default_topics="NBA,プログラミング,GitHubトレンド"
+    )
     
     @classmethod
     def get_active_accounts(cls):
         """有効なアカウント一覧を返す"""
-        accounts = [cls.ACCOUNT1, cls.ACCOUNT2]
+        accounts = [cls.ACCOUNT1, cls.ACCOUNT2, cls.ACCOUNT3]
         return [a for a in accounts if a.is_active]
     
     @classmethod
