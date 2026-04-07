@@ -2,50 +2,44 @@ import feedparser
 import random
 
 
-# アカウント1: machiru731（テクノロジー / 音楽,サッカー,生活）
+# アカウント1: カルチャー＆ライフスタイル（音楽,生活,最新ガジェット・ライフハック）
 ACCOUNT1_FEEDS = {
     "音楽": [
         "https://natalie.mu/music/feed/news",
     ],
-    "サッカー": [
-        "https://www.soccer-king.jp/feed",
-    ],
     "生活": [
         "https://www.lifehacker.jp/feed/index.xml",
     ],
+    "最新ガジェット・ライフハック": [
+        "https://www.gizmodo.jp/feed/index.xml",
+    ],
 }
 
-# アカウント2: yohei753（農業,AI,音楽）- 海外ソース
+# アカウント2: 有益AI・生産性（ChatGPT活用法,最新AIツール,時短術）
 ACCOUNT2_FEEDS = {
-    "農業": [
-        "https://modernfarmer.com/feed/",
-        "https://www.agweb.com/rss/news",
-        "https://www.successfulfarming.com/feed",
+    "ChatGPT活用法": [
+        "https://ledge.ai/feed/",
     ],
-    "AI": [
-        "https://feeds.feedburner.com/mittechipreview",
-        "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
-        "https://techcrunch.com/category/artificial-intelligence/feed/",
+    "最新AIツール": [
+        "https://ainow.ai/feed/",
     ],
-    "音楽": [
-        "https://pitchfork.com/feed/feed-news/rss",
-        "https://www.stereogum.com/feed/",
-        "https://consequence.net/feed/",
+    "時短術": [
+        "https://diamond.jp/list/rss",
     ],
 }
 
+# アカウント3: エンジニア共感・ポエム（エンジニアあるある,リモートワークのリアル,バグとの戦い）
 ACCOUNT3_FEEDS = {
-    "NBA": [
-        "https://www.espn.com/espn/rss/nba/news",
-        "https://bleacherreport.com/articles/feed?tag_id=19",
+    "エンジニアあるある": [
+        "https://b.hatena.ne.jp/hotentry/it.rss",
+        "https://zenn.dev/topics/ポエム/feed",
     ],
-    "プログラミング": [
+    "リモートワークのリアル": [
+        "https://qiita.com/popular-items/feed",
+    ],
+    "バグとの戦い": [
+        "https://zenn.dev/feed",
         "https://dev.to/feed",
-        "https://hnrss.org/frontpage",
-    ],
-    "GitHubトレンド": [
-        "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
-        "https://www.ghacks.net/feed/",
     ],
 }
 

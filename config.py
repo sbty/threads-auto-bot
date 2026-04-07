@@ -34,23 +34,23 @@ class Config:
     # アカウント定義
     ACCOUNT1 = AccountConfig(
         "ACCOUNT1",
-        default_niche="テクノロジー",
-        default_tone="カジュアルで知的",
-        default_topics="音楽,サッカー,生活"
+        default_niche="心地よい日常とカルチャー",
+        default_tone="カジュアルで知的、共感を誘う",
+        default_topics="音楽,生活,最新ガジェット・ライフハック"
     )
     
     ACCOUNT2 = AccountConfig(
         "ACCOUNT2",
-        default_niche="農業,AI,音楽",
-        default_tone="丁寧、ユーモア",
-        default_topics="農業,AI,音楽"
+        default_niche="AIツール活用と生産性向上",
+        default_tone="分かりやすくプロフェッショナル、箇条書きを活用",
+        default_topics="ChatGPT活用法,最新AIツール,時短術"
     )
 
     ACCOUNT3 = AccountConfig(
         "ACCOUNT3",
-        default_niche="プログラミングとスポーツ",
-        default_tone="ポジティブで丁寧",
-        default_topics="NBA,プログラミング,GitHubトレンド"
+        default_niche="プログラミングとエンジニアの日常",
+        default_tone="親しみやすい、少し自虐的でユーモアがある、ゆるい本音",
+        default_topics="エンジニアあるある,リモートワークのリアル,バグとの戦い"
     )
     
     @classmethod
