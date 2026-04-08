@@ -43,12 +43,31 @@ ACCOUNT3_FEEDS = {
     ],
 }
 
+# アカウント4: 音楽と日常、YouTubeクリエイターのリアル
+ACCOUNT4_FEEDS = {
+    "おすすめ作業用BGM": [
+        "https://note.com/topic/music/rss",
+        "https://b.hatena.ne.jp/hotentry/entertainment.rss",
+    ],
+    "音楽制作の裏側": [
+        "https://www.snrec.jp/feed",
+        "https://zenn.dev/topics/dtm/feed",
+    ],
+    "YouTube運営のリアル": [
+        "https://youtube-jp.googleblog.com/feeds/posts/default?alt=rss",
+        "https://note.com/topic/youtube/rss",
+    ],
+    "日常を彩る音楽": [
+        "https://natalie.mu/music/feed/news",
+    ],
+}
+
 # アカウント名 → フィード辞書のマッピング
 ACCOUNT_FEEDS = {
     "account1": ACCOUNT1_FEEDS,
     "account2": ACCOUNT2_FEEDS,
     "account3": ACCOUNT3_FEEDS,
-
+    "account4": ACCOUNT4_FEEDS,
 }
 
 

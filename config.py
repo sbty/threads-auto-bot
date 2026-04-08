@@ -53,10 +53,17 @@ class Config:
         default_topics="エンジニアあるある,リモートワークのリアル,バグとの戦い"
     )
     
+    ACCOUNT4 = AccountConfig(
+        "ACCOUNT4",
+        default_niche="音楽と日常、YouTubeクリエイターのリアル",
+        default_tone="エモーショナルで本音ベース、音楽への愛や裏話を語り共感を生むトーン",
+        default_topics="おすすめ作業用BGM,音楽制作の裏側,YouTube運営のリアル,日常を彩る音楽"
+    )
+    
     @classmethod
     def get_active_accounts(cls):
         """有効なアカウント一覧を返す"""
-        accounts = [cls.ACCOUNT1, cls.ACCOUNT2, cls.ACCOUNT3]
+        accounts = [cls.ACCOUNT1, cls.ACCOUNT2, cls.ACCOUNT3, cls.ACCOUNT4]
         return [a for a in accounts if a.is_active]
     
     @classmethod
@@ -68,5 +75,7 @@ class Config:
         print(f"Gemini API: {'✅ 設定済み' if cls.GEMINI_API_KEY else '❌ 未設定'}")
         print(f"\nアカウント1: {cls.ACCOUNT1}")
         print(f"アカウント2: {cls.ACCOUNT2}")
+        print(f"アカウント3: {cls.ACCOUNT3}")
+        print(f"アカウント4: {cls.ACCOUNT4}")
         print(f"\n有効アカウント数: {len(cls.get_active_accounts())}")
         print("=" * 50)
