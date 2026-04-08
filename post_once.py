@@ -112,6 +112,7 @@ def main():
         "ACCOUNT1": Config.ACCOUNT1,
         "ACCOUNT2": Config.ACCOUNT2,
         "ACCOUNT3": Config.ACCOUNT3,
+        "ACCOUNT4": Config.ACCOUNT4,
     }
 
     if account_name in account_map:
