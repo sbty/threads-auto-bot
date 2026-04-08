@@ -1,0 +1,33 @@
+name: Account4 Post(parasoni12)
+
+on:
+  schedule:
+    # JST 9:00 / 14:00 / 20:00 (UTC -9時間)
+    - cron: '0 0 * * *'    # JST 9:00
+    - cron: '0 5 * * *'    # JST 14:00
+    - cron: '0 11 * * *'   # JST 20:00
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Random delay
+        run: sleep $((RANDOM % 300))
+
+      - name: Post to Threads
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ACCOUNT4_THREADS_ACCESS_TOKEN: ${{ secrets.ACCOUNT4_THREADS_ACCESS_TOKEN }}
+          ACCOUNT4_THREADS_USER_ID: ${{ secrets.ACCOUNT4_THREADS_USER_ID }}
+        run: python post_once.py ACCOUNT4
