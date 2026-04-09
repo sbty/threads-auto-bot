@@ -55,9 +55,9 @@ class Config:
     
     ACCOUNT4 = AccountConfig(
         "ACCOUNT4",
-        default_niche="音楽と日常、YouTubeクリエイターのリアル",
-        default_tone="エモーショナルで本音ベース、音楽への愛や裏話を語り共感を生むトーン",
-        default_topics="おすすめ作業用BGM,音楽制作の裏側,YouTube運営のリアル,日常を彩る音楽"
+        default_niche="心地よい音楽とリスナーの日常",
+        default_tone="エモーショナルで本音ベース、純粋な音楽への愛や共感を呼ぶトーン",
+        default_topics="おすすめ作業用BGM,心を落ち着かせる音楽,名曲との出会い,日常を彩る音楽"
     )
     
     @classmethod

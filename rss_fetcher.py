@@ -43,19 +43,17 @@ ACCOUNT3_FEEDS = {
     ],
 }
 
-# アカウント4: 音楽と日常、YouTubeクリエイターのリアル
+# アカウント4: 心地よい音楽とリスナーの日常
 ACCOUNT4_FEEDS = {
     "おすすめ作業用BGM": [
         "https://note.com/topic/music/rss",
         "https://b.hatena.ne.jp/hotentry/entertainment.rss",
     ],
-    "音楽制作の裏側": [
-        "https://www.snrec.jp/feed",
-        "https://zenn.dev/topics/dtm/feed",
+    "心を落ち着かせる音楽": [
+        "https://note.com/topic/music/rss",
     ],
-    "YouTube運営のリアル": [
-        "https://youtube-jp.googleblog.com/feeds/posts/default?alt=rss",
-        "https://note.com/topic/youtube/rss",
+    "名曲との出会い": [
+        "https://natalie.mu/music/feed/news",
     ],
     "日常を彩る音楽": [
         "https://natalie.mu/music/feed/news",
