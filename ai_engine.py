@@ -15,23 +15,45 @@ class AIEngine:
     MODEL_LIGHT = "gemini-2.5-flash"
 
     @staticmethod
-    def _generate(model_name, prompt, json_output=True):
+    def _generate(model_name, prompt, json_output=True, use_grounding=False):
         from google.genai import types
+        
+        tools = []
+        if use_grounding:
+            # Google検索グラウンディングを有効化
+            tools.append(types.Tool(google_search_retrieval=types.GoogleSearchRetrieval()))
+
         config = types.GenerateContentConfig(
-            temperature=0.9,
+            temperature=0.7,  # 事実性を高めるため少し下げる (以前は0.9)
             top_p=0.95,
             top_k=40,
             max_output_tokens=8192,
             thinking_config=types.ThinkingConfig(thinking_budget=0),
+            tools=tools
         )
+        
         if json_output:
             config.response_mime_type = "application/json"
-        response = client.models.generate_content(
-            model=model_name,
-            contents=prompt,
-            config=config
-        )
-        return response.text
+        
+        try:
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+                config=config
+            )
+            return response.text
+        except Exception as e:
+            # グラウンディング起因のエラー等の場合、ツールなしで再試行
+            if use_grounding:
+                print(f"  ⚠️ Grounding failed, retrying without tools: {e}")
+                config.tools = None
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=config
+                )
+                return response.text
+            raise e
 
     @staticmethod
     def _parse_json(text):
@@ -91,13 +113,17 @@ class AIEngine:
             "- Write in extremely natural, conversational Japanese. Avoid robotic, rigid phrasing.\n"
             "- Do not repeat past posts.\n"
             "\n"
+            "## IMPORTANT: Factual Accuracy & Hallucination Prevention\n"
+            "- **FACT CHECK**: Before stating any facts (especially about sports results, technical specs, or recent events), ensure they are accurate. If you are not 100% sure, use the search tool or avoid making a definitive statement.\n"
+            "- Do not invent facts. If the information is not in your current context or search results, speak in general terms or ask the audience.\n"
+            "\n"
             "## IMPORTANT: Persona & Engagement Strategy\n"
             "- FULLY ADOPT THE PERSONA implied by the Tone and Topic. If the topic is 'Engineer Life', speak as an actual engineer experiencing it. If it's 'AI Tips', speak as someone who uses them daily to save time.\n"
             "- DO NOT act like a detached 'news commenter'. Speak from a first-person, authentic perspective.\n"
-            "- Share highly actionable tips, relatable struggles ('あるある'), or strong opinions.\n"
+            "- Share highly actionable tips, relatable struggles ('あるある'), or strong opinions based on facts.\n"
             "- **CRITICAL**: Always end the post with a SPECIFIC, engaging question to encourage followers to reply. DO NOT use generic questions like '皆さんはどう思いますか？'. Instead, ask specific things like '皆さんのプロジェクトではどうしてますか？' or 'これ使ってる人いる？'.\n"
             "\n"
-            "## Latest news headlines (Use these ONLY as inspiration. You don't have to report them. Extract the core concept and adapt it to your persona.)\n"
+            "## Latest news headlines (If your niche/topic is news-centric, focus on distilling the key points and providing professional insights. Otherwise, use them as inspiration for persona-driven storytelling.)\n"
             f"{rss_str}\n"
             "\n"
             "## Recent posts (avoid duplicates)\n"
@@ -115,7 +141,7 @@ class AIEngine:
             '}\n'
         )
 
-        raw = AIEngine._generate(AIEngine.MODEL_MAIN, prompt, json_output=True)
+        raw = AIEngine._generate(AIEngine.MODEL_MAIN, prompt, json_output=True, use_grounding=True)
         return AIEngine._parse_json(raw)
 
     @staticmethod

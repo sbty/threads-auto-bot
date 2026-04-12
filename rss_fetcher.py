@@ -28,18 +28,22 @@ ACCOUNT2_FEEDS = {
     ],
 }
 
-# アカウント3: エンジニア共感・ポエム（エンジニアあるある,リモートワークのリアル,バグとの戦い）
+# アカウント3: エンジニア注目の最新テック・開発トレンド
 ACCOUNT3_FEEDS = {
-    "エンジニアあるある": [
-        "https://b.hatena.ne.jp/hotentry/it.rss",
-        "https://zenn.dev/topics/ポエム/feed",
+    "最新テックニュース": [
+        "https://rss.itmedia.co.jp/rss/2.0/news_bursts.xml",
+        "https://japan.cnet.com/rss/index.rdf",
     ],
-    "リモートワークのリアル": [
+    "開発トレンド": [
+        "https://b.hatena.ne.jp/hotentry/it.rss",
         "https://qiita.com/popular-items/feed",
     ],
-    "バグとの戦い": [
+    "注目ライブラリ・ツール": [
         "https://zenn.dev/feed",
         "https://dev.to/feed",
+    ],
+    "技術の活用事例": [
+        "https://ledge.ai/feed/",
     ],
 }
 

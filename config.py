@@ -48,9 +48,9 @@ class Config:
 
     ACCOUNT3 = AccountConfig(
         "ACCOUNT3",
-        default_niche="プログラミングとエンジニアの日常",
-        default_tone="親しみやすい、少し自虐的でユーモアがある、ゆるい本音",
-        default_topics="エンジニアあるある,リモートワークのリアル,バグとの戦い"
+        default_niche="エンジニア注目の最新テック・開発トレンド",
+        default_tone="情報感度が高く、客観的な視点に独自の考察を添えるトーン。適度に知的で。ニュースの要約が得意。",
+        default_topics="最新テックニュース,開発トレンド,注目ライブラリ・ツール,技術の活用事例"
     )
     
     ACCOUNT4 = AccountConfig(
