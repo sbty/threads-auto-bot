@@ -48,37 +48,29 @@ class AccountBot:
             if headlines:
                 print(f"  RSS: {len(headlines)}件")
             
-            # AI生成（アカウント別設定適用・リトライ付き）
-            result = None
-            for attempt in range(3):
-                try:
-                    result = self.generate_post(topic, headlines)
-                    if result and result.get("content"):
-                        break
-                except Exception as e:
-                    print(f"  ⚠️ AI generation error (attempt {attempt+1}/3): {e}")
-                    time.sleep(5)
+            # AI生成（アカウント別設定適用）
+            try:
+                result = self.generate_post(topic, headlines)
+            except Exception as e:
+                print(f"  ❌ AI generation failed: {e}")
+                return
             
             if not result or not result.get("content"):
-                print("  ❌ AI generation failed after 3 attempts")
+                print("  ❌ AI generation returned no content")
                 return
 
             content = result["content"]
             print(f"  Generated: {content[:60]}...")
 
-            # 投稿（リトライ付き）
-            post_id = None
-            for attempt in range(3):
-                try:
-                    post_id = self.client.create_text_post(content)
-                    if post_id:
-                        break
-                except Exception as e:
-                    print(f"  ⚠️ Threads posting error (attempt {attempt+1}/3): {e}")
-                    time.sleep(5)
+            # 投稿
+            try:
+                post_id = self.client.create_text_post(content)
+            except Exception as e:
+                print(f"  ❌ Threads posting failed: {e}")
+                return
             
             if not post_id:
-                print("  ❌ Post failed after 3 attempts")
+                print("  ❌ Post failed (no ID returned)")
                 return
 
             print(f"  ✅ Posted! ID: {post_id}")

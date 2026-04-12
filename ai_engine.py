@@ -15,7 +15,7 @@ class AIEngine:
     MODEL_LIGHT = "gemini-2.5-flash"
 
     @staticmethod
-    def _generate(model_name, prompt, json_output=True, use_grounding=False):
+    def _generate(model_name, prompt, json_output=True, use_grounding=True):
         from google.genai import types
         
         tools = []
@@ -24,7 +24,7 @@ class AIEngine:
             tools.append(types.Tool(google_search_retrieval=types.GoogleSearchRetrieval()))
 
         config = types.GenerateContentConfig(
-            temperature=0.7,  # 事実性を高めるため少し下げる (以前は0.9)
+            temperature=0.7,
             top_p=0.95,
             top_k=40,
             max_output_tokens=8192,
@@ -35,25 +35,12 @@ class AIEngine:
         if json_output:
             config.response_mime_type = "application/json"
         
-        try:
-            response = client.models.generate_content(
-                model=model_name,
-                contents=prompt,
-                config=config
-            )
-            return response.text
-        except Exception as e:
-            # グラウンディング起因のエラー等の場合、ツールなしで再試行
-            if use_grounding:
-                print(f"  ⚠️ Grounding failed, retrying without tools: {e}")
-                config.tools = None
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=prompt,
-                    config=config
-                )
-                return response.text
-            raise e
+        response = client.models.generate_content(
+            model=model_name,
+            contents=prompt,
+            config=config
+        )
+        return response.text
 
     @staticmethod
     def _parse_json(text):
