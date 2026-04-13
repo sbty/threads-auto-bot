@@ -11,11 +11,11 @@ client = genai.Client(api_key=Config.GEMINI_API_KEY)
 
 class AIEngine:
 
-    MODEL_MAIN = "gemini-2.0-flash"
-    MODEL_LIGHT = "gemini-2.0-flash"
+    MODEL_MAIN = "gemini-2.5-flash"
+    MODEL_LIGHT = "gemini-2.5-flash"
 
     @staticmethod
-    def _generate(model_name, prompt, json_output=True, use_grounding=True):
+    def _generate(model_name, prompt, json_output=True, use_grounding=False):
         from google.genai import types
         
         tools = []
@@ -186,5 +186,5 @@ class AIEngine:
 }}
 """
 
-        raw = AIEngine._generate(AIEngine.MODEL_MAIN, prompt, json_output=True)
+        raw = AIEngine._generate(AIEngine.MODEL_MAIN, prompt, json_output=True, use_grounding=False)
         return AIEngine._parse_json(raw)

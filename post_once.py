@@ -42,24 +42,20 @@ def post_for_account(account_config):
     # --- AI生成（アカウント別設定）---
     print("\n--- Generating post ---")
     db = Database(prefix)
-    result = None
-    for attempt in range(3):
-        try:
-            result = AIEngine.generate_post(
-                custom_topic=topic,
-                rss_context=headlines,
-                account_niche=account_config.niche,
-                account_tone=account_config.tone,
-                account_db=db
-            )
-            if result and result.get("content"):
-                break
-        except Exception as e:
-            print(f"  ⚠️ AI generation error (attempt {attempt+1}/3): {e}")
-            time.sleep(5)
+    try:
+        result = AIEngine.generate_post(
+            custom_topic=topic,
+            rss_context=headlines,
+            account_niche=account_config.niche,
+            account_tone=account_config.tone,
+            account_db=db
+        )
+    except Exception as e:
+        print(f"❌ AI generation error: {e}")
+        sys.exit(1)
             
     if not result or not result.get("content"):
-        print("❌ AI generation failed after 3 attempts")
+        print("❌ AI generation returned no content")
         sys.exit(1)
 
     content = result["content"]
@@ -72,18 +68,14 @@ def post_for_account(account_config):
         access_token=account_config.access_token,
         user_id=account_config.user_id
     )
-    post_id = None
-    for attempt in range(3):
-        try:
-            post_id = client.create_text_post(content)
-            if post_id:
-                break
-        except Exception as e:
-            print(f"  ⚠️ Threads posting error (attempt {attempt+1}/3): {e}")
-            time.sleep(5)
+    try:
+        post_id = client.create_text_post(content)
+    except Exception as e:
+        print(f"❌ Threads posting error: {e}")
+        sys.exit(1)
 
     if not post_id:
-        print("❌ Post failed after 3 attempts")
+        print("❌ Post failed (no ID returned)")
         sys.exit(1)
 
     print(f"✅ Posted! ID: {post_id}")
