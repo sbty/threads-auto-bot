@@ -11,8 +11,8 @@ client = genai.Client(api_key=Config.GEMINI_API_KEY)
 
 class AIEngine:
 
-    MODEL_MAIN = "gemini-2.5-flash"
-    MODEL_LIGHT = "gemini-2.5-flash"
+    MODEL_MAIN = "gemini-2.0-flash"
+    MODEL_LIGHT = "gemini-2.0-flash"
 
     @staticmethod
     def _generate(model_name, prompt, json_output=True, use_grounding=True):
