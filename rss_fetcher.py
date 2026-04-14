@@ -7,8 +7,8 @@ ACCOUNT1_FEEDS = {
     "音楽": [
         "https://natalie.mu/music/feed/news",
     ],
-    "生活": [
-        "https://www.lifehacker.jp/feed/index.xml",
+    "海外サッカー": [
+        "https://www.goal.com/jp/feeds/news/rss.xml",
     ],
     "最新ガジェット・ライフハック": [
         "https://www.gizmodo.jp/feed/index.xml",

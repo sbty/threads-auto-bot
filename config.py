@@ -36,7 +36,7 @@ class Config:
         "ACCOUNT1",
         default_niche="心地よい日常とカルチャー",
         default_tone="カジュアルで知的、共感を誘う",
-        default_topics="音楽,生活,最新ガジェット・ライフハック"
+        default_topics="音楽,海外サッカー,最新ガジェット・ライフハック"
     )
     
     ACCOUNT2 = AccountConfig(
