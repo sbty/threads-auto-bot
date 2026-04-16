@@ -35,7 +35,5 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ACCOUNT2_THREADS_ACCESS_TOKEN: ${{ secrets.ACCOUNT2_THREADS_ACCESS_TOKEN }}
           ACCOUNT2_THREADS_USER_ID: ${{ secrets.ACCOUNT2_THREADS_USER_ID }}
-          ACCOUNT2_NICHE: "農業,AI,音楽"
-          ACCOUNT2_TONE: "丁寧、ユーモア"
-          ACCOUNT2_TOPICS: "農業,AI,音楽"
+
         run: python post_once.py ACCOUNT2
