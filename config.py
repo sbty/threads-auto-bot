@@ -35,28 +35,28 @@ class Config:
     ACCOUNT1 = AccountConfig(
         "ACCOUNT1",
         default_niche="心地よい日常とカルチャー",
-        default_tone="カジュアルで知的、共感を誘う",
+        default_tone="カジュアルで知的、共感を誘う。サッカーなどの話題では必ず具体的な試合名、チーム名、選手名、監督などの関係者に言及すること。",
         default_topics="音楽,海外サッカー,最新ガジェット・ライフハック"
     )
     
     ACCOUNT2 = AccountConfig(
         "ACCOUNT2",
         default_niche="AIツール活用と生産性向上",
-        default_tone="分かりやすくプロフェッショナル、箇条書きを活用",
+        default_tone="分かりやすくプロフェッショナル、箇条書きを活用。投稿では必ず具体的なツール名、記事、またはプロジェクト名に言及すること。",
         default_topics="ChatGPT活用法,最新AIツール,時短術"
     )
 
     ACCOUNT3 = AccountConfig(
         "ACCOUNT3",
         default_niche="エンジニア注目の最新テック・開発トレンド",
-        default_tone="情報感度が高く、客観的な視点に独自の考察を添えるトーン。適度に知的で。ニュースの要約が得意。",
+        default_tone="情報感度が高く、客観的な視点に独自の考察を添えるトーン。適度に知的で。ニュースの要約が得意。必ず具体的な技術記事、ツール名、またはプロジェクト名などに言及すること。",
         default_topics="最新テックニュース,開発トレンド,注目ライブラリ・ツール,技術の活用事例"
     )
     
     ACCOUNT4 = AccountConfig(
         "ACCOUNT4",
         default_niche="心地よい音楽とリスナーの日常",
-        default_tone="エモーショナルで本音ベース、純粋な音楽への愛や共感を呼ぶトーン",
+        default_tone="エモーショナルで本音ベース、純粋な音楽への愛や共感を呼ぶトーン。必ず具体的な曲名、アーティスト名、または関連する音楽記事などに言及すること。",
         default_topics="おすすめ作業用BGM,心を落ち着かせる音楽,名曲との出会い,日常を彩る音楽"
     )
     

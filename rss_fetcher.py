@@ -5,62 +5,63 @@ import random
 # アカウント1: カルチャー＆ライフスタイル（音楽,生活,最新ガジェット・ライフハック）
 ACCOUNT1_FEEDS = {
     "音楽": [
-        "https://natalie.mu/music/feed/news",
+        "https://pitchfork.com/rss/reviews/tracks/",
+        "https://www.nme.com/feed",
     ],
     "海外サッカー": [
-        "https://www.goal.com/jp/feeds/news/rss.xml",
+        "https://www.espn.com/espn/rss/soccer/news",
+        "https://feeds.bbci.co.uk/sport/football/rss.xml",
     ],
     "最新ガジェット・ライフハック": [
-        "https://www.gizmodo.jp/feed/index.xml",
+        "https://www.theverge.com/rss/index.xml",
+        "https://lifehacker.com/rss",
     ],
 }
 
 # アカウント2: 有益AI・生産性（ChatGPT活用法,最新AIツール,時短術）
 ACCOUNT2_FEEDS = {
     "ChatGPT活用法": [
-        "https://ledge.ai/feed/",
+        "https://venturebeat.com/category/ai/feed/",
     ],
     "最新AIツール": [
-        "https://ainow.ai/feed/",
+        "https://techcrunch.com/category/artificial-intelligence/feed/",
     ],
     "時短術": [
-        "https://diamond.jp/list/rss",
+        "https://www.makeuseof.com/feed/",
     ],
 }
 
 # アカウント3: エンジニア注目の最新テック・開発トレンド
 ACCOUNT3_FEEDS = {
     "最新テックニュース": [
-        "https://rss.itmedia.co.jp/rss/2.0/news_bursts.xml",
-        "https://japan.cnet.com/rss/index.rdf",
+        "https://techcrunch.com/feed/",
+        "https://feeds.arstechnica.com/arstechnica/index",
     ],
     "開発トレンド": [
-        "https://b.hatena.ne.jp/hotentry/it.rss",
-        "https://qiita.com/popular-items/feed",
+        "https://news.ycombinator.com/rss",
     ],
     "注目ライブラリ・ツール": [
-        "https://zenn.dev/feed",
         "https://dev.to/feed",
+        "https://thenewstack.io/feed/",
     ],
     "技術の活用事例": [
-        "https://ledge.ai/feed/",
+        "https://www.technologyreview.com/feed/",
     ],
 }
 
 # アカウント4: 心地よい音楽とリスナーの日常
 ACCOUNT4_FEEDS = {
     "おすすめ作業用BGM": [
-        "https://note.com/topic/music/rss",
-        "https://b.hatena.ne.jp/hotentry/entertainment.rss",
+        "https://www.npr.org/rss/rss.php?id=1039",
     ],
     "心を落ち着かせる音楽": [
-        "https://note.com/topic/music/rss",
+        "https://pitchfork.com/rss/reviews/albums/",
     ],
     "名曲との出会い": [
-        "https://natalie.mu/music/feed/news",
+        "https://www.rollingstone.com/music/music-news/feed/",
     ],
     "日常を彩る音楽": [
-        "https://natalie.mu/music/feed/news",
+        "https://www.billboard.com/feed/",
     ],
 }
 

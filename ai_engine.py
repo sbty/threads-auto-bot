@@ -21,7 +21,7 @@ class AIEngine:
         tools = []
         if use_grounding:
             # Google検索グラウンディングを有効化
-            tools.append(types.Tool(google_search_retrieval=types.GoogleSearchRetrieval()))
+            tools.append(types.Tool(google_search=types.GoogleSearch()))
 
         config = types.GenerateContentConfig(
             temperature=0.7,
@@ -32,7 +32,7 @@ class AIEngine:
             tools=tools
         )
         
-        if json_output:
+        if json_output and not use_grounding:
             config.response_mime_type = "application/json"
         
         response = client.models.generate_content(
