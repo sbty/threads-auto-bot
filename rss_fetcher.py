@@ -12,10 +12,10 @@ ACCOUNT1_FEEDS = {
         "https://www.espn.com/espn/rss/soccer/news",
         "https://feeds.bbci.co.uk/sport/football/rss.xml",
     ],
-    "最新ガジェット・ライフハック": [
-        "https://www.theverge.com/rss/index.xml",
-        "https://lifehacker.com/rss",
-    ],
+    # "最新ガジェット・ライフハック": [
+    #     "https://www.theverge.com/rss/index.xml",
+    #     "https://lifehacker.com/rss",
+    # ],
 }
 
 # アカウント2: 有益AI・生産性（ChatGPT活用法,最新AIツール,時短術）

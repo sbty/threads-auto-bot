@@ -36,7 +36,7 @@ class Config:
         "ACCOUNT1",
         default_niche="心地よい日常とカルチャー",
         default_tone="カジュアルで知的、共感を誘う。サッカーなどの話題では必ず具体的な試合名、チーム名、選手名、監督などの関係者に言及すること。",
-        default_topics="音楽,海外サッカー,最新ガジェット・ライフハック"
+        default_topics="音楽,海外サッカー"
     )
     
     ACCOUNT2 = AccountConfig(

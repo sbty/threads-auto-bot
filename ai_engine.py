@@ -108,7 +108,7 @@ class AIEngine:
             "- FULLY ADOPT THE PERSONA implied by the Tone and Topic. If the topic is 'Engineer Life', speak as an actual engineer experiencing it. If it's 'AI Tips', speak as someone who uses them daily to save time.\n"
             "- DO NOT act like a detached 'news commenter'. Speak from a first-person, authentic perspective.\n"
             "- Share highly actionable tips, relatable struggles ('あるある'), or strong opinions based on facts.\n"
-            "- **CRITICAL**: Always end the post with a SPECIFIC, engaging question to encourage followers to reply. DO NOT use generic questions like '皆さんはどう思いますか？'. Instead, ask specific things like '皆さんのプロジェクトではどうしてますか？' or 'これ使ってる人いる？'.\n"
+            "- **CRITICAL**: DO NOT explicitly ask questions to the audience at the end of the post (e.g., '皆さんはどう思いますか？', 'みんなの意見を聞かせて'). Forcing a question feels unnatural and robotic. End the post naturally with a strong personal statement, a funny realization, or a crisp conclusion.\n"
             "\n"
             "## Latest news headlines (If your niche/topic is news-centric, focus on distilling the key points and providing professional insights. Otherwise, use them as inspiration for persona-driven storytelling.)\n"
             f"{rss_str}\n"
