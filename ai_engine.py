@@ -91,7 +91,7 @@ class AIEngine:
             "## Account Persona & Context\n"
             f"- Today's specific topic/news context: {niche}\n"
             f"- Persona Tone: {tone}\n"
-            "- Ultimate Goal: Maximize engagement (Replies, Quotes, Saves, Likes)\n"
+            "- Ultimate Goal: Maximize engagement (Saves, Likes, Quotes)\n"
             "\n"
             "## Content Rules\n"
             "- Under 400 chars (ideal 150-300). Keep it concise, punchy, and highly readable using line breaks.\n"
@@ -108,7 +108,7 @@ class AIEngine:
             "- FULLY ADOPT THE PERSONA implied by the Tone and Topic. If the topic is 'Engineer Life', speak as an actual engineer experiencing it. If it's 'AI Tips', speak as someone who uses them daily to save time.\n"
             "- DO NOT act like a detached 'news commenter'. Speak from a first-person, authentic perspective.\n"
             "- Share highly actionable tips, relatable struggles ('あるある'), or strong opinions based on facts.\n"
-            "- **CRITICAL**: DO NOT ask any questions to the audience at the end of the post. NEVER end the post with sentences like 'どう思いますか？', 'コメント欄で教えてください', or '皆さんは？'. This sounds like cheap engagement bait and is extremely robotic. Just declare your thoughts and end the post cleanly with a natural observation, exclamation, or period.\n"
+            "- **CRITICAL**: DO NOT ask any questions to the audience at the end of the post. NEVER end the post with a question mark (？) or sentences like 'どう思いますか？', 'コメント欄で教えてください', or '皆さんは？'. This sounds like cheap engagement bait and is extremely robotic. To get engagement, rely on deep resonance or strong opinions, NOT questions. Just declare your thoughts and end the post cleanly with a natural observation, exclamation, or period.\n"
             "\n"
             "## Latest news headlines (If your niche/topic is news-centric, focus on distilling the key points and providing professional insights. Otherwise, use them as inspiration for persona-driven storytelling.)\n"
             f"{rss_str}\n"
@@ -124,7 +124,7 @@ class AIEngine:
             '{\n'
             '    "content": "post text in Japanese",\n'
             '    "topic": "topic category (1-2 words)",\n'
-            '    "reasoning": "why this post will get high engagement (Replies/Saves)"\n'
+            '    "reasoning": "why this post will be heavily saved and quoted by users"\n'
             '}\n'
         )
 
