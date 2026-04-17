@@ -29,7 +29,8 @@ class AIEngine:
             top_k=40,
             max_output_tokens=8192,
             thinking_config=types.ThinkingConfig(thinking_budget=0),
-            tools=tools
+            tools=tools,
+            system_instruction="You are a professional Threads poster. DO NOT end posts with questions. DO NOT ask the audience for opinions like '皆さんはどうですか？' or '教えてください'. End clearly with a declaration or reflection."
         )
         
         if json_output and not use_grounding:
@@ -122,7 +123,7 @@ class AIEngine:
             "## Format Instruction\n"
             f"Generate 1 post based on the style: [{selected_style}]. Output in this JSON format:\n"
             '{\n'
-            '    "content": "post text in Japanese",\n'
+            '    "content": "post text in Japanese (Must NOT end with a question mark or a question to the audience)",\n'
             '    "topic": "topic category (1-2 words)",\n'
             '    "reasoning": "why this post will be heavily saved and quoted by users"\n'
             '}\n'
