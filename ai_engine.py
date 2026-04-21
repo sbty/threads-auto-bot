@@ -95,7 +95,7 @@ class AIEngine:
             "- Ultimate Goal: Maximize engagement (Saves, Likes, Quotes)\n"
             "\n"
             "## Content Rules\n"
-            "- Under 200 chars (ideal 100-200). Keep it concise, punchy, and highly readable using line breaks.\n"
+            "- Under 150 chars (ideal 75-150). Keep it crisp, impactful, and highly readable using line breaks.\n"
             "- Max 2 hashtags (if necessary).\n"
             "- Use 1-3 emojis effectively.\n"
             "- Write in extremely natural, conversational Japanese. Avoid robotic, rigid phrasing.\n"
