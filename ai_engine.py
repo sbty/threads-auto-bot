@@ -30,7 +30,7 @@ class AIEngine:
             max_output_tokens=8192,
             thinking_config=types.ThinkingConfig(thinking_budget=0),
             tools=tools,
-            system_instruction="You are a professional Threads poster. DO NOT end posts with questions. DO NOT ask the audience for opinions like '皆さんはどうですか？' or '教えてください'. End clearly with a declaration or reflection."
+            system_instruction="You are a professional Threads poster. DO NOT end posts with questions. DO NOT ask the audience for opinions like '皆さんはどうですか？' or '教えてください'. End clearly with a declaration or reflection. 必ず文字数（最大150文字）を厳守してください。"
         )
         
         if json_output and not use_grounding:
@@ -74,7 +74,7 @@ class AIEngine:
             "knowledge sharing - useful tips",
             "opinion style - unique take on a trend",
             "story style - personal episode",
-            "list style - 3 reasons why...",
+            "bullet points - 2 short crisp points",
             "one-liner impact - short punchy phrase",
             "debate style - controversial opinion",
         ]
@@ -95,7 +95,7 @@ class AIEngine:
             "- Ultimate Goal: Maximize engagement (Saves, Likes, Quotes)\n"
             "\n"
             "## Content Rules\n"
-            "- Under 150 chars (ideal 75-150). Keep it crisp, impactful, and highly readable using line breaks.\n"
+            "- 【文字数厳守】必ず全体を150文字以内に収めること（理想は75〜150文字）。これより長くなることは絶対に避けてください。短くパンチの効いた文章にすること。\n"
             "- Max 2 hashtags (if necessary).\n"
             "- Use 1-3 emojis effectively.\n"
             "- Write in extremely natural, conversational Japanese. Avoid robotic, rigid phrasing.\n"
